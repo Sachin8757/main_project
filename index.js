@@ -1,4 +1,4 @@
-const dotenv=require('dotenv').config();
+// const dotenv=require('dotenv').config();
 const express=require('express')
 const app=express();
 const port = process.env.PORT || 8080;
@@ -32,7 +32,7 @@ app.engine("ejs",ejsMate);
 const store=MongoStore.create({
     mongoUrl:'mongodb://127.0.0.1:27017/wanderlust',
     crypto:{
-        secret:process.env.Secret,
+        secret:'abdckdjkdjkdjkd',
         touchAfter:24*3600,
     }
 })
@@ -41,7 +41,7 @@ store.on("error",()=>{
 })
 const sessionoption={
     store,
-    secret:process.env.Secret,
+    secret:'abdckdjkdjkdjkd',
     resave:false,
     saveUninitialized:true,
     Cookie:{
