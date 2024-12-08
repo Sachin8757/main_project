@@ -1,7 +1,6 @@
 // const dotenv=require('dotenv').config();
 const express=require('express')
 const app=express();
-const port = 3000;
 const mongoose=require("./model/connection.js")
 const path=require('path')
 var methodoverride=require('method-override');
@@ -85,7 +84,7 @@ app.use((err,req,res,next)=>{
     let{statusCode=500,message="something went wrong!"}=err;
     res.status(statusCode).render("error.ejs",{err})
 })
-
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`running...`)
   })
