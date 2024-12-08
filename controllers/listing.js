@@ -1,8 +1,8 @@
 const Listing=require("../model/listing")
 const {listingSchema}=require("../model/schema.js")
 const multer  = require('multer')
-// const{storage}=require('../cloudConfig.js')
-// const upload = multer({storage})
+const{storage}=require('../cloudConfig.js')
+const upload = multer({storage})
 const ExpressError=require("../util/ExpressError.js")
 
 //index route

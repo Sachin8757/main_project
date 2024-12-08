@@ -1,7 +1,7 @@
- require('dotenv').config()
+const dotenv=require('dotenv').config();
 const express=require('express')
 const app=express();
-const port = process.env.PORT ||8080;
+const port = 3000;
 const mongoose=require("./model/connection.js")
 const path=require('path')
 var methodoverride=require('method-override');
@@ -19,6 +19,8 @@ const passport=require('passport')
 const LocaStrategy=require('passport-local')
 const User=require("./model/user.js")
 
+
+app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(methodoverride('_method'));
 app.set("views engin","/views")
@@ -28,9 +30,9 @@ app.engine("ejs",ejsMate);
 
 
 const store=MongoStore.create({
-    mongoUrl:process.env.ATLASDB_URL,
+    mongoUrl:'mongodb://127.0.0.1:27017/wanderlust',
     crypto:{
-        secret:process.env.Secret,
+        secret:dotenv.Secret,
         touchAfter:24*3600,
     }
 })
@@ -39,7 +41,7 @@ store.on("error",()=>{
 })
 const sessionoption={
     store,
-    secret:process.env.Secret,
+    secret:dotenv.Secret,
     resave:false,
     saveUninitialized:true,
     Cookie:{
@@ -49,7 +51,7 @@ const sessionoption={
     }
 };
 
-// index route
+// // index route
 app.get("/",async(req,res)=>{
     res.redirect("/listing")
     
@@ -57,8 +59,8 @@ app.get("/",async(req,res)=>{
 app.use(session(sessionoption))
 app.use(flsah());
 //user login logout 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(passport.initialize())
 app.use(passport.session());
 passport.use(new LocaStrategy(User.authenticate()))

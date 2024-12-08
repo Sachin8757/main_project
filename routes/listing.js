@@ -11,20 +11,20 @@ const{storage}=require('../cloudConfig.js')
 const upload = multer({storage})
 
 
-//listing page
+// //listing page
 route.get("/",wrapAsynce(listingController.index))
-//new route
+// //new route
 route.get("/new",isLoggedIn,wrapAsynce(listingController.renderform))
 
-route.post("/new",isLoggedIn,upload.single('listing[image]')(listingController.createform))
+route.post("/new",isLoggedIn,upload.single('listing[image]'),(listingController.createform))
 
-//show route
+// //show route
 route.get("/:id",wrapAsynce(listingController.listindeatils))
-//edit route
+// //edit route
 route.get("/:id/edit",isLoggedIn,isOwner,wrapAsynce(listingController.editform))
 
 route.patch("/edit/:id",isLoggedIn,isOwner,upload.single('listing[image]'),wrapAsynce(listingController.editpostform))
 
-//delete route
+// //delete route
 route.delete("/:id",isLoggedIn,isOwner,wrapAsynce(listingController.deletelisting))
 module.exports=route;
