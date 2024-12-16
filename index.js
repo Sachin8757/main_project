@@ -84,7 +84,7 @@ app.use((err,req,res,next)=>{
     let{statusCode=500,message="something went wrong!"}=err;
     res.status(statusCode).render("error.ejs",{err})
 })
-const port = process.env.PORT || 4000;
-app.listen(port, () => {
+
+app.listen(3000, () => {
     console.log(`running...`)
   })
